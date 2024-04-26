@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="pioneer3dx">
+
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find p3dx_description)/urdf/materials.xacro" />
+
+  <!-- Import robot -->
+  <xacro:include filename="$(find p3dx_description)/urdf/p3dx/pioneer3dx_body.xacro"/>
+  <xacro:pioneer3dx_body name="chassis" parent="base_link" meshes="package://p3dx_description/meshes/p3dx"/>
+
+  <!-- Hokuyo UTM-30LX
+  <xacro:include filename="$(find p3dx_description)/urdf/sensors/hokuyo_utm30lx.urdf.xacro" />
+  <xacro:sensor_hokuyo_utm30lx prefix="hokuyo_utm30lx" parent="chassis" meshes="package://p3dx_description/meshes/sensors" min_angle="${-135.0*M_PI/180.0}" max_angle="${135.0*M_PI/180.0}" >
+    <origin xyz="0 0 0.23" rpy="0 0 0"/>
+  </xacro:sensor_hokuyo_utm30lx>
+ -->
+
+  <!-- Sensor Hokuyo URG-04LX 
+  <xacro:include filename="$(find p3dx_description)/urdf/sensors/hokuyo_urg04lx.urdf.xacro" />
+  <xacro:sensor_hokuyo_urg04lx prefix="hokuyo_urg04lx" parent="chassis" meshes="package://p3dx_description/meshes/sensors" min_angle="-2.0943" max_angle="2.0943" >
+    <origin xyz="0.05 0 0.23" rpy="0 0 0"/>
+  </xacro:sensor_hokuyo_urg04lx> 
+ -->
+
+ <!-- Adicionando a câmera Orbbec Astra 
+  <xacro:include filename="$(find p3dx_description)/urdf/sensors/orbbec_astra.urdf.xacro" />
+  <xacro:sensor_orbbec_astra prefix="orbbec_astra" parent="chassis" meshes="package://p3dx_description/meshes/sensors" color="blue">
+    <origin xyz="0.15 0 0.25" rpy="0 0 0"/> 
+  </xacro:sensor_orbbec_astra> 
+  -->
+   <!-- Adicionando a câmera Intel RealSense D435i-->
+  <xacro:include filename="$(find p3dx_description)/urdf/sensors/_d435i.urdf.xacro" />
+  <xacro:sensor_d435i name="d435i" parent="chassis" meshes="package://p3dx_description/meshes/sensors" topics_ns="Pionner/D435i_camera" unite_imu_method="linear_interpolation" enable_pointCloud="true" align_depth="true">
+    <origin xyz="0.13 0 0.265" rpy="0 0 0"/>
+  </xacro:sensor_d435i> 
+
+ <!-- Adicionando a câmera Intel RealSense D435i 
+  <xacro:arg name="use_nominal_extrinsics" default="false" />
+  <xacro:include filename="$(find p3dx_description)/urdf/sensors/d435i/_d435i.urdf.xacro" />
+  <xacro:sensor_d435i parent="chassis" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+    <origin xyz="0.13 0 0.265" rpy="0 0 0"/>
+  </xacro:sensor_d435i> -->
+
+<!-- <xacro:include filename="$(find p3dx_description)/urdf/sensors/xsens_mti.urdf.xacro"/>
+ <xacro:imu parent="chassis" name="imu">
+    <origin xyz="0.15 0.0 0.265" rpy="0 0 0"/>
+ </xacro:imu>   -->
+
+</robot>
+
+
